@@ -1,0 +1,19 @@
+1. key：
+openssl         genrsa -out mybank.key 1024
+				genrsa -des3 -out www.mydomain.com.key 1024
+
+2. 私钥(需要密码)
+openssl         req -new -x509 -key mybank.key -days 750 -out mybank-private.pfx
+
+
+3. 公钥
+         生成PKCS12 格式Keystore
+openssl         pkcs12 -export -name test-alias -in mybank-private.pfx -inkey mybank.key -out mybank-public.pfx
+
+
+
+
+
+
+pfx格式证书转换为pem格式命令
+openssl         pkcs12 -in mybank-public.pfx -passin pass:密码 -nodes -out mybank-public.pem
